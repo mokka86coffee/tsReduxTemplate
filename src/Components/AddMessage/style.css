@@ -1,0 +1,17 @@
+.addMessage {
+    height: 10vh;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.addMessage__title {
+    width: 100%;
+}
+
+.addMessage__input {
+    width: 300px;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.514);
+}

@@ -1,0 +1,5 @@
+.aside {
+    width: 30vw;
+    height: calc(100vh - 300px);
+    overflow-y: scroll;
+}

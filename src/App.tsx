@@ -1,26 +1,37 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { connectToWebSocket } from './store/actions';
+import { SideBar, MessagesList, AddMessage } from './Components';
+
 import logo from './logo.svg';
 import './App.css';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type Props = {
+  connectToWebSocket: Function
 }
 
-export default App;
+class App extends React.Component<Props> {
+  componentDidMount() {
+    this.props.connectToWebSocket();
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Welcome to Chat</h2>
+        </div>
+        <section className="wrap">
+          <SideBar />
+          <section className="messages__wrap">
+            <MessagesList />
+            <AddMessage />
+          </section>
+        </section>
+      </div>
+    );
+  }
+}
+
+export default connect(null, { connectToWebSocket })(App);

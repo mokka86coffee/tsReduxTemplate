@@ -1,0 +1,6 @@
+.messagesList {
+    display: flex;
+    flex-direction: column;
+    height: calc(60vh - 300px);
+    overflow-y: scroll;
+}
