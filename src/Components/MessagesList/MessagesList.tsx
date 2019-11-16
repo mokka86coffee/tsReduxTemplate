@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {createSelector} from 'reselect';
+// import {createSelector} from 'reselect';
 import './style.css';
 
 interface Props {

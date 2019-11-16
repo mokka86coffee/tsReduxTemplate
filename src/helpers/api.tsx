@@ -30,19 +30,17 @@ class WebSocketConnection {
            alert('Обрыв соединения'); // например, "убит" процесс сервера
         }
         
-        alert('Код: ' + event.code + ' причина: ' + event.reason);
         this.connected = false;
     }
 
     onmessage = ({data}: any) => {
-        const {message, type} = JSON.parse(data);
-        console.log("TCL: WebSocketConnection -> onmessage -> data", data)
-        this.dispatchToStore({ type, payload: { message }});
+        const {type, ...rest} = JSON.parse(data);
+        // console.log("TCL: WebSocketConnection -> onmessage -> data", data)
+        this.dispatchToStore({ type, payload: { ...rest }});
     };
 
     onerror = (error: any) => {
-        console.log("TCL: WebSocketConnection -> onerror -> error", error)
-        alert("Ошибка " + error.message);
+        // console.log("TCL: WebSocketConnection -> onerror -> error", error)
     }
 
     send = (message: string) => this.socket.send(message);

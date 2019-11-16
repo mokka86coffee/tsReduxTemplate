@@ -1,14 +1,15 @@
-import { applyMiddleware, compose, Store, AnyAction } from 'redux';
+import { applyMiddleware, compose, AnyAction, MiddlewareAPI, Dispatch } from 'redux';
+// import reduxThunk from 'redux-thunk';
 import { webSocketConnect } from '../helpers/api';
-import { SocketUrl, SocketActionsTypes } from '../helpers/constants';
+import { SocketActionsTypes } from '../helpers/constants';
 
 const composeEnhancers = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const socketMiddleware = ({ dispatch, getState }: any) => (next: Function) => (action: AnyAction) => {
-  console.log("TCL: socketMiddleware -> action", action)
+
   switch(action.type) {
     case SocketActionsTypes.CONNECT_TO_SOCKET: {
-      const url = action.payload.url || SocketUrl;
+      const {url} = action.payload;
       const webSocketConnection = webSocketConnect(url, dispatch);
       return next({ type: SocketActionsTypes.SOCKET_CONNECTION, payload: webSocketConnection });
     }
@@ -31,8 +32,15 @@ const socketMiddleware = ({ dispatch, getState }: any) => (next: Function) => (a
   }
 }
 
+const customThunk = ({dispatch}: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: Function | {type: string, payload: any}) => {
+  return typeof action === 'function'
+    ? action(dispatch)
+    : next(action);
+}
+
 export const middlewareCollection = applyMiddleware(
-    socketMiddleware
+    socketMiddleware,
+    customThunk
 );
 
 export const middlewares = composeEnhancers(middlewareCollection);

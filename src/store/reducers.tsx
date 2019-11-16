@@ -45,8 +45,24 @@ const messagesReducer = (store: IMessage[] | [] = initialMessagesStore, action: 
     return store;
 }
 
+export interface IUser {
+    id: number,
+    name: string
+}
+
+const initialUsersStore: IUser[] | [] = [];
+
+const usersReducer = (store: IUser[] | [] = initialUsersStore, action: ISocketAction) => {
+    if(action.type === SocketActionsTypes.USERS_LIST) {
+        return action.payload.users;
+    }
+
+    return store;
+}
+
 
 export const rootReducer = combineReducers({
     webSocketConnection: socketReducer,
-    messages: messagesReducer
+    messages: messagesReducer,
+    users: usersReducer
 });

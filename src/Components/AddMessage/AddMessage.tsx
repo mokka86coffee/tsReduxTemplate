@@ -8,7 +8,7 @@ class AddMessage extends Component <any> {
     message: ''
   }
 
-  onChange = (e: React.FormEvent<HTMLInputElement>) => {
+  onChange = (e: any) => { //  React.FormEvent<HTMLInputElement>
     this.setState({ message: e.target.value });
   }
 

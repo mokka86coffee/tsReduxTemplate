@@ -7,7 +7,14 @@ export const SocketActionsTypes = {
     ADD_MESSAGE: 'ADD_MESSAGE',
     MESSAGE_RECEIVED: 'MESSAGE_RECEIVED',
     ADD_USER: 'ADD_USER',
+    USERS_LIST: 'USERS_LIST',
     USER_ADDED: 'USER_ADDED'
 }
 
-export const SocketUrl = 'ws://localhost:8686';
+export const DataFetchActionTypes = {
+    FETCH_INFO_DATA_SERVER: 'FETCH_INFO_DATA_SERVER',
+    RECEIVED_INFO_DATA_SERVER: 'SOCKET_CONNECTION'
+}
+
+export const SocketURL = 'ws://localhost:8686';
+export const DataURL = 'http://localhost:8800';
